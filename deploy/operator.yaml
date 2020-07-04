@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: console-notifications-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: console-notifications-operator
+  template:
+    metadata:
+      labels:
+        name: console-notifications-operator
+    spec:
+      serviceAccountName: console-notifications-operator
+      containers:
+        - name: console-notifications-operator
+          # Replace this with the built image name
+          image: image-registry.openshift-image-registry.svc:5000/openshift-console-notifications-operator/operator:v0.0.1
+          command:
+          - console-notifications-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "console-notifications-operator"
