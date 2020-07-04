@@ -1,1 +1,1 @@
-# console-notifications-operator
+# console-notifications-operator.
