@@ -16,15 +16,13 @@ spec:
       containers:
         - name: console-notifications-operator
           # Replace this with the built image name
-          image: image-registry.openshift-image-registry.svc:5000/openshift-console-notifications-operator/operator:v0.0.1
+          image: image-registry.openshift-image-registry.svc:5000/console-notifications-operator/operator:v0.0.1
           command:
           - console-notifications-operator
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
+              value: "console-notifications"
             - name: POD_NAME
               valueFrom:
                 fieldRef:

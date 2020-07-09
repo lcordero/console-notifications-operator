@@ -32,43 +32,76 @@ spec:
         spec:
           description: ConsoleNotificationSpec defines the desired state of ConsoleNotification
           properties:
-            backgroundColor:
-              description: backgroundColor is the color of the background for the
-                notification as CSS data type color.
-              type: string
-            color:
-              description: color is the color of the text for the notification as
-                CSS data type color
-              type: string
-            link:
-              description: link is an object that holds notification link details.
-              properties:
-                href:
-                  description: href is the absolute secure URL for the link (must
-                    use https)
-                  type: string
-                text:
-                  description: text is the display text for the link
-                  type: string
-              required:
-              - href
-              - text
-              type: object
-            location:
+            active:
               description: location is the location of the notification in the console.
-              type: string
-            text:
+              type: boolean
+            expirationDate:
               description: text is the visible text of the notification.
               type: string
+            namespacesScope:
+              description: text is the visible text of the notification.
+              items:
+                type: string
+              type: array
+            notification:
+              description: link is an object that holds notification link details.
+              properties:
+                backgroundColor:
+                  description: backgroundColor is the color of the background for
+                    the notification as CSS data type color.
+                  type: string
+                color:
+                  description: color is the color of the text for the notification
+                    as CSS data type color
+                  type: string
+                link:
+                  description: link is an object that holds notification link details.
+                  properties:
+                    href:
+                      description: href is the absolute secure URL for the link (must
+                        use https)
+                      type: string
+                    text:
+                      description: text is the display text for the link
+                      type: string
+                  required:
+                  - href
+                  - text
+                  type: object
+                location:
+                  description: location is the location of the notification in the
+                    console.
+                  type: string
+                text:
+                  description: text is the visible text of the notification.
+                  type: string
+              required:
+              - backgroundColor
+              - color
+              - link
+              - location
+              - text
+              type: object
           required:
-          - backgroundColor
-          - color
-          - link
-          - location
-          - text
+          - active
+          - expirationDate
+          - namespacesScope
+          - notification
           type: object
         status:
           description: ConsoleNotificationStatus defines the observed state of ConsoleNotification
+          properties:
+            lastTransitionTime:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                of cluster Important: Run "operator-sdk generate k8s" to regenerate
+                code after modifying this file Add custom validation using kubebuilder
+                tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html'
+              type: string
+            message:
+              type: string
+          required:
+          - lastTransitionTime
+          - message
           type: object
       type: object
   version: v1alpha1

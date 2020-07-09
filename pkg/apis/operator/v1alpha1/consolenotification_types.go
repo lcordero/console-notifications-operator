@@ -7,7 +7,7 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// ConsoleNotificationSpec defines the desired state of ConsoleNotification
+// ConsoleNotificationSpecLink defines the desired state of ConsoleNotification
 type ConsoleNotificationSpecLink struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
@@ -20,8 +20,8 @@ type ConsoleNotificationSpecLink struct {
 	Text string `json:"text"`
 }
 
-// ConsoleNotificationSpec defines the desired state of ConsoleNotification
-type ConsoleNotificationSpec struct {
+// ConsoleNotificationSpecNotification defines the desired state of ConsoleNotification
+type ConsoleNotificationSpecNotification struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
@@ -42,11 +42,32 @@ type ConsoleNotificationSpec struct {
 	Text string `json:"text"`
 }
 
+// ConsoleNotificationSpec defines the desired state of ConsoleNotification
+type ConsoleNotificationSpec struct {
+	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
+	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
+	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+
+	// link is an object that holds notification link details.
+	Notification ConsoleNotificationSpecNotification `json:"notification"`
+
+	// location is the location of the notification in the console.
+	Active bool `json:"active"`
+
+	// text is the visible text of the notification.
+	ExpirationDate string `json:"expirationDate"`
+
+	// text is the visible text of the notification.
+	NamespacesScope []string `json:"namespacesScope"`
+}
+
 // ConsoleNotificationStatus defines the observed state of ConsoleNotification
 type ConsoleNotificationStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	LastTransitionTime string `json:"lastTransitionTime"`
+	Message            string `json:"message"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

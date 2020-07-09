@@ -1,0 +1,21 @@
+apiVersion: operator.openshift.io/v1alpha1
+kind: ConsoleNotification
+metadata:
+  name: example
+  namespace: console-notifications
+spec:
+  notification:
+    backgroundColor: '#0088ce'
+    color: '#fff'
+    link:
+      href: 'https://www.example.com'
+      text: Optional link text
+    location: BannerTop
+    text: This is an example notification message with an opti
+  active: false
+  expirationDate: "07/30/2020"
+  namespacesScope:
+    - "project1"
+    - "project2"
+    - "project3"
+status: {}
